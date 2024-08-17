@@ -1,33 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
+import { Box, Button } from '@mui/material'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [result, setResult] = useState<string>("Pas de mot trouvé");
+  const [isCorrect, setIsCorrect] = useState<boolean>(true);
+  const [lettersToShow, setLettersToShow] = useState(["a", "b", "c", "d", "e", "f", "g"]);
+
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Box id="game-container">
+
+        <Box id="images-container">
+            <img id="queue-image" src="queue1.png" alt="Queue" className='side-image' />
+            <Box id="dynamic-letter-container"></Box>
+            <img id="tete-image" src="tete1.png" alt="Tête" className='side-image' />
+        </Box>
+        <Box id="score-container" style={{ color: isCorrect ? "green" : "red" }}>{result}</Box>
+        <Box id="letters-container">{lettersToShow.map(l => <div className='letter'>{l}</div>)}</Box>
+
+        <Box id="input-container">
+            <Button id="reset-button">
+                <img src="red_cross.png" alt="Reset" style={{ width: "34px", height:"34px", background: "transparent" }} />
+            </Button>
+            <Button id="delete-button">
+                <img src="yellow_back_arrow.png" alt="Delete" style={{ width: "34px", height:"34px", background: "transparent" }} />
+            </Button>
+        </Box>
+
+        <Button id="validate-button">Valider</Button> 
+
+        </Box>
     </>
   )
 }
